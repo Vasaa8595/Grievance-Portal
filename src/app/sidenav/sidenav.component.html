@@ -1,0 +1,94 @@
+
+
+<mat-toolbar>
+  <div class="top">
+    <img width="65px" src="Bannari_Amman_Institute_of_Technology_logo.png">
+    <button mat-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+    <h2>BIT Grievance Portal</h2>
+  </div>
+    <div class="img">
+      <div class="dropdown" (click)="toggleDropdown()">
+      <img [src]="profileimage" alt="userpic">{{Name}} 
+              <span class="left-icon"></span>
+              <span class="right-icon"></span>
+              <div class="items">
+                <a href="#" style="--i:1;"><span>Profile</span></a>
+                <a href="#" style="--i:2;"><span (click)="signOut()">Logout</span></a>
+              </div>
+            </div>
+      </div>
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="side">
+    <img [src]="profileimage" alt="userpic">
+    <mat-list>
+      <mat-list-item>
+        <a mat-button routerLink='dashboard'>Dashboard</a>
+
+      </mat-list-item>
+      <mat-list-item>
+        <a mat-button routerLink='component' >Personal</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a mat-button routerLink='component1' >Anonymous</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">{{firstLetter}}</button>
+    <div class="logo-text" *ngIf="collapsed">{{name}}</div>
+    <button class="btn-close" *ngIf="collapsed" (click)="closeSidenav()">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a  class="sidenav-nav-link" [routerLink]="[data.routelink]">
+        <i class="sidenav-nav-link-icon"[class]="data.icon"></i>
+        <span class="sidenav-nav-link-text" *ngIf="collapsed">{{data.label}}</span>
+      </a>
+    </li>
+  </ul>
+</div> -->
+
+
+
+
+
+<!-- <div class="card">
+  <img [src]="profileimage">
+  <h3>Name: {{name}}</h3>
+  <h2>Email: {{Email}}</h2>
+  
+  
+   <a (click)="signOut()">Logout</a>
+</div> -->
+
