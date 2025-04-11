@@ -1,0 +1,68 @@
+<div style="height: 92vh !important;;" class="h-100">
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Faculty Dashboard</h1>
+      <p>Manage and track student grievances efficiently.</p>
+    </div>
+
+    <!-- Query Summary -->
+    <div class="query-summary">
+      <div class="summary-box">
+        <h2>Total Queries</h2>
+        <p>{{ queries.length }}</p>
+      </div>
+      <div class="summary-box">
+        <h2>Solved Queries</h2>
+        <p>{{ solvedQueries }}</p>
+      </div>
+      <div class="summary-box">
+        <h2>Rejected Queries</h2>
+        <p>{{ rejectedQueries }}</p>
+      </div>
+    </div>
+
+    <!-- Query Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Roll Number</th>
+          <th>Category</th>
+          <th>Summary</th>
+          <th>Status</th>
+          <th>Actions</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let query of queries; let i = index">
+          <td>{{ query.raiserId }}</td>
+          <td>{{ query.category }}</td>
+          <td>{{ query.summary }}</td>
+          <td
+            [class.solved]="query.status === 'Approved'"
+            [class.rejected]="query.status === 'Rejected'"
+            [class.pending]="query.status === 'Pending'"
+          >
+            {{ query.status }}
+          </td>
+          <td>
+            <button type="button" class="btn-view" (click)="viewQuery(query)">
+              View
+            </button>
+
+            <button class="btn-solve" (click)="solveQuery(query)">Solve</button>
+            <button class="btn-reject" (click)="rejectQuery(query)">
+              Reject
+            </button>
+          </td>
+          <td>
+            <form class="form-group">
+              <textarea [(ngModel)]="query.remarks"  [name]="query.complaintId" class="form-control p-1" placeholder="Remarks..." ></textarea>
+            </form>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Issue Details</title>
+    <link rel="stylesheet" href="personal-grievance.component.css">
+</head>
+<body>
+    <div class="issue-container">
+        <h2>📝 Enter Query Details</h2>
+
+        <form [formGroup]="query" (submit)="onSubmit()">
+            <table class="issue-table">
+                <tr>
+                    <td><label for="roll-number">Roll Number</label></td>
+                    <td><input disabled type="text" id="roll-number" name="roll-number" [placeholder]="id"></td>
+                </tr>
+                <tr>
+                    <td><label for="department">Department</label></td>
+                    <td><input disabled [placeholder]="department" type="text" id="department" name="department"></td>
+                </tr>
+                <tr>
+                    <td><label for="category">Category</label></td>
+                    <td>
+                        <select formControlName="category" id="category">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Transport">Transport</option>
+                            <option value="BIP Portal">BIP Portal</option>
+                            <option value="Moodle">Moodle</option>
+                            <option value="Fees">Fees</option>
+                            <option value="Office">Office</option>
+                            <option value="Academics">Academics</option>
+                            <option value="TAC">TAC</option>
+                            <option value="PS">PS</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="summary">Summary</label></td>
+                    <td><input formControlName="summary" type="text" id="summary" name="summary"></td>
+                </tr>
+                <tr>
+                    <td><label for="description">Description</label></td>
+                    <td><textarea formControlName="description" id="description" name="description" rows="5"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right;">
+                        <button type="submit">Submit Issue</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

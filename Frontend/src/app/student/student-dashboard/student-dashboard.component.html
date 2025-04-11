@@ -1,0 +1,151 @@
+
+
+<div class="dashboard-container">
+  <div class="left-panel">
+    <div class="profile-section">
+      <div class="profile-card">
+        <div class="profile-image"></div>
+
+        <div class="profile-details">
+
+          <h2 class="studentname">{{ studentName }}</h2>
+
+          <p class="role">Student</p>
+          <div class="info-grid">
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <p>{{studentDepartment}}</p>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-calendar"></i>
+              <p>Year {{studentYear}}</p>
+            </div>
+          </div>
+          <div class="status-badge" [ngClass]="{'active': enrollment === 'Continuing', 'inactive': enrollment === 'Discontinued'}">
+            {{enrollment}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-section">
+      <h3>Academic Details</h3>
+      <div class="kpi-grid">
+        <div class="kpi-item">
+          <span class="kpi-label">Attendance</span>
+          <span class="kpi-value">{{attendance}}%</span>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-label">GPA</span>
+          <span class="kpi-value">{{gpa}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <div class="status-panel">
+      <div class="academic-status">
+        <h3>Academic Status</h3>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="label">Semester</span>
+            <span class="value">{{currentSemester}}</span>
+          </div>
+          <div class="status-item">
+            <span class="label">Academic Year</span>
+            <span class="value">{{academicYear}}</span>
+          </div>
+          <div class="status-item">
+            <span class="label">Enrollment</span>
+            <div class="enrollment-status" [ngClass]="{'active': enrollment === 'Continuing', 'inactive': enrollment === 'Discontinued'}">
+              {{enrollment}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="query-section">
+      <div class="query-stats">
+        <div class="stat-card total">
+          <h4>Total Queries</h4>
+          <span>{{totalQueries}}</span>
+        </div>
+        <div class="stat-card solved">
+          <h4>Solved</h4>
+          <span>{{solvedQuereies}}</span>
+        </div>
+        <div class="stat-card pending">
+          <h4>Pending</h4>
+          <span>{{pendingQueries}}</span>
+        </div>
+        <div class="stat-card rejected">
+          <h4>Rejected</h4>
+          <span>{{rejectedQueries}}</span>
+        </div>
+      </div>
+
+      <div class="query-list-container">
+        <div class="list-header">
+          <h3>Recent Queries</h3>
+          <div class="search-container">
+            <div class="search-box">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" placeholder="Search queries..." [(ngModel)]="searchQuery" >
+            </div>
+            <button (click)="exportQueries()" class="export-btn">
+              <i class="fas fa-download"></i>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <div class="query-cards" *ngIf="queries.length > 0; else noQueries">
+          <div class="query-card" *ngFor="let query of queries" [ngClass]="query.status.toLowerCase()">
+            <div class="query-header">
+              <h4>{{query.summary}}</h4>
+              <span class="status-pill" [ngClass]="query.status.toLowerCase()">{{query.status}}</span>
+            </div>
+            <div class="query-info">
+              <div class="time-info">
+                <div class="submission-time">
+                  <i class="fas fa-calendar-alt"></i>
+                  <span>Submitted: {{query.submittedDate | date:'MMM d, y'}}</span>
+                  <span class="time">{{query.submittedDate | date:'shortTime'}}</span>
+                </div>
+                <div class="resolution-time" *ngIf="query.resolvedDate">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Resolved: {{query.resolvedDate | date:'MMM d, y'}}</span>
+                  <span class="time">{{query.resolvedDate | date:'shortTime'}}</span>
+                </div>
+              </div>
+              <div class="remarks" *ngIf="query.remarks">
+                <i class="fas fa-comment-alt"></i>
+                <p>{{query.remarks}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noQueries>
+          <div class="no-queries">
+            <i class="fas fa-search"></i>
+            <p>No queries found</p>
+          </div>
+        </ng-template>
+
+        <div class="pagination">
+          <button [disabled]="currentPage === 1" (click)="previousPage()" class="page-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="page-info">Page {{currentPage}} of {{totalPages}}</span>
+          <button [disabled]="currentPage === totalPages" (click)="nextPage()" class="page-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

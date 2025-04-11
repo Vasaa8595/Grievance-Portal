@@ -1,0 +1,18 @@
+<div *ngIf="toastService.doShow" style="width: 300px;z-index: 100;"
+[ngClass]="{'text-bg-success' : !toastService.isError,'text-bg-danger' : toastService.isError}"
+class="rounded-2 overflow-x-hidden p-fixed toast-container m-3 top-0 end-0 ">
+  <div class="toast-body w-100 h-100 position-relative p-2">
+    <div class="d-flex gap-4">
+      @if (toastService.isError) {
+        <i class="ms-2 bi bi-exclamation-circle fs-4"></i>
+      }
+      @else {
+        <i class="ms-2 bi bi-check-circle fs-4"></i>
+      }
+      <div class="d-flex flex-grow-1 align-items-center">
+        <span class="fw-semibold"> {{toastService.message}} </span>
+      </div>
+    </div>
+  </div>
+  <div style="height: 2px;" [ngStyle]="{width : (toastService.width |async) + '%'}" class="bottom-0 start-0 end-0 bg-white"></div>
+</div>
